@@ -39,8 +39,15 @@ def check():
     response = requests.get(get_url)
     response = BeautifulSoup(response.content, 'lxml', from_encoding='gbk')
     parameters = extract_parameters(str(response))
-    print(parameters)
-    pass
+    if(parameters.get("zxopt")!='1'):
+        print("未登录")
+        return False
+    print("已经登录")
+    response = requests.get('http://6.ipw.cn')
+    print("ipv6地址为"+response.content.decode('utf-8'))
+    response = requests.get('http://4.ipw.cn')
+    print("ipv4地址为"+response.content.decode('utf-8'))
+    return True
 
 
 def connect():
@@ -76,7 +83,7 @@ def connect():
         "v46ip") + "&wlanacip=null&wlanacname=null&mac=00-00-00-00-00-00&ip=" + extracted_params.get(
         "v46ip") + "&enAdvert=0&queryACIP=0&jsVersion=2.4.3&loginMethod=1"
 
-    print(post_url)
+    print("本次发送登录的post_url为"+post_url)
 
     # 初始化配置解析器
     config = configparser.ConfigParser()
@@ -103,4 +110,5 @@ def connect():
     # print(post_data.get("upass"))
     # 打印重定向后的最终URL和部分响应内容作为验证
     print("Final URL:", post_response.url)
+    check()
     # print("Response content:", post_response.text[:1000])  # 打印响应内容的前1000个字符

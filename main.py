@@ -7,9 +7,8 @@ os.environ['http_proxy'] = ''
 os.environ['https_proxy'] = ''
 # 定义常用网站列表
 websites = [
-    'https://cust.edu.cn',
+    'https://baidu.com',
 ]
-
 
 # 定义 ping 网站函数
 def ping_website(url):
@@ -18,7 +17,7 @@ def ping_website(url):
         print(response.status_code)
         return response.status_code
     except requests.exceptions.RequestException as e:
-        print(f"Error pinging {url}: {e}")
+        print(f"错误pinging {url}: {e}")
         return None
 
 # 主函数
@@ -29,8 +28,10 @@ def main():
             if status_code:
                 print(f"{website} 网站正常，状态码: {status_code}")
             else:
-                connect.connect()
+                if connect.check()==False:
+                    connect.connect()
         time.sleep(10)
 
 if __name__ == "__main__":
+    # main()
     connect.check()
