@@ -1,3 +1,5 @@
+import configparser
+
 import requests
 import time
 import connect
@@ -23,6 +25,13 @@ def ping_website(url):
 
 # 主函数
 def main():
+    config = configparser.ConfigParser()
+    if not os.path.exists('config.ini'):
+        DDDDD = input("请输入DDDDD: ")
+        upass = input("请输入upass: ")
+        config['credentials'] = {'DDDDD': DDDDD, 'upass': upass}
+        with open('config.ini', 'w') as configfile:
+            config.write(configfile)
     while True:
         for website in websites:
             status_code = ping_website(website)
