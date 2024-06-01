@@ -8,6 +8,7 @@ os.environ['https_proxy'] = ''
 # 定义常用网站列表
 websites = [
     'https://baidu.com',
+    'https://microsoft.com',
 ]
 
 # 定义 ping 网站函数
