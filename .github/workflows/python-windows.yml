@@ -26,7 +26,7 @@ jobs:
         pip install pyinstaller
 
     - name: Build EXE
-      run: pyinstaller --onefile --windowed pyinstaller.spec
+      run: pyinstaller  pyinstaller.spec
 
     - name: Archive production artifacts
       uses: actions/upload-artifact@v2
